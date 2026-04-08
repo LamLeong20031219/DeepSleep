@@ -56,37 +56,56 @@
             color: #b91c1c;
         }
         
-        /* 消息气泡样式 */
+        /* 消息气泡样式 - 用户气泡 #EDF3FE 底 + 黑字，机器人直接输出无背景 */
         .message-user {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 16px;
         }
         .message-user .bubble {
-            background-color: #f4f4f4;
+            background-color: #EDF3FE;  /* 新要求浅蓝底 #EDF3FE */
             padding: 10px 16px;
             border-radius: 18px;
             max-width: 85%;
             font-size: 15px;
             line-height: 1.5;
-            color: #1f2937;
+            color: #1f2937;  /* 黑色文字 */
+            border: 1px solid #dce7fc;
         }
+        /* 机器人消息：完全无背景，直接输出，无灰色底，纯黑文字 */
         .message-bot {
             display: flex;
             justify-content: flex-start;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         .message-bot .bubble {
-            background-color: #e8e8e8;
-            padding: 10px 16px;
-            border-radius: 18px;
-            max-width: 85%;
+            background-color: transparent;
+            padding: 4px 0;
+            border-radius: 0;
+            max-width: 100%;
             font-size: 15px;
-            line-height: 1.5;
-            color: #1f2937;
+            line-height: 1.6;
+            color: #111827;
+            box-shadow: none;
+            border: none;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
         .message-bot {
-    white-space: pre-wrap;  /* 保留换行符 */
+            white-space: pre-wrap;
+        }
+        
+        /* 侧边栏选中样式：按照要求 选中时背景 #E4EDFE，文字颜色 #3964FE */
+        .chat-item-selected {
+            background-color: #E4EDFE !important;
+            border-radius: 0.5rem;
+        }
+        .chat-item-selected .chat-title-text {
+            color: #3964FE !important;
+            font-weight: 500;
+        }
+        .chat-item:not(.chat-item-selected):hover {
+            background-color: #f3f4f6;
         }
     </style>
 </head>
@@ -261,11 +280,9 @@
             menuDiv.className = 'three-dots-menu';
             menuDiv.setAttribute('data-chat-id', chatId);
             
-            // 计算菜单位置：按钮的右下方
-            let left = rect.right - 140; // 菜单宽度约140px，让菜单右对齐于按钮
-            let top = rect.bottom + 4;    // 按钮下方4px
+            let left = rect.right - 140;
+            let top = rect.bottom + 4;
             
-            // 边界检测：防止超出视口右侧
             if (left + 140 > window.innerWidth) {
                 left = rect.right - 140;
             }
@@ -273,9 +290,8 @@
                 left = rect.left;
             }
             
-            // 边界检测：防止超出视口底部
             if (top + 200 > window.innerHeight) {
-                top = rect.top - 200; // 如果下方空间不足，显示在按钮上方
+                top = rect.top - 200;
                 if (top < 0) top = 4;
             }
             
@@ -384,22 +400,14 @@
 
             container.innerHTML = activeChat.messages.map(m => {
                 if (m.role === 'user') {
-                    return `
-                        <div class="message-user">
-                            <div class="bubble">${escapeHtml(m.content)}</div>
-                        </div>
-                    `;
+                    return `<div class="message-user"><div class="bubble">${escapeHtml(m.content)}</div></div>`;
                 } else {
-                    return `
-                        <div class="message-bot">
-                            <div class="bubble">${escapeHtml(m.content)}</div>
-                        </div>
-                    `;
+                    return `<div class="message-bot"><div class="bubble">${escapeHtml(m.content)}</div></div>`;
                 }
             }).join('');
             
             const scrollArea = document.getElementById('chat-messages-container');
-            scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
+            if (scrollArea) scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
         }
         
         function escapeHtml(str) {
@@ -408,9 +416,10 @@
                 if (m === '<') return '&lt;';
                 if (m === '>') return '&gt;';
                 return m;
-            });
+            }).replace(/\n/g, '<br>');
         }
 
+        // 核心：侧边栏选中样式 #E4EDFE 背景 + #3964FE 文字
         function renderHistory() {
             const container = document.getElementById('chat-history-container');
             const sortedChats = [...chats].sort((a, b) => {
@@ -419,17 +428,21 @@
                 return b.id - a.id;
             });
             
-            container.innerHTML = sortedChats.map(chat => `
-                <div class="chat-item group flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-[#ececec] cursor-pointer mb-1 ${chat.id === currentId ? 'bg-[#ececec]' : ''}" style="position: relative;">
-                    <div class="flex items-center gap-1 flex-1 min-w-0" onclick="switchChat(${chat.id})">
-                        ${chat.pinned ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" class="flex-shrink-0"><line x1="12" y1="3" x2="12" y2="9"/><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg>` : ''}
-                        <span class="text-sm text-gray-700 truncate flex-1">${escapeHtml(chat.title)}</span>
+            container.innerHTML = sortedChats.map(chat => {
+                const isSelected = (chat.id === currentId);
+                const selectedClass = isSelected ? 'chat-item-selected' : '';
+                return `
+                    <div class="chat-item group flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-[#f0f2f5] cursor-pointer mb-1 transition-all ${selectedClass}" data-chat-id="${chat.id}" style="position: relative;">
+                        <div class="flex items-center gap-1 flex-1 min-w-0" onclick="switchChat(${chat.id})">
+                            ${chat.pinned ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3964FE" stroke-width="2" class="flex-shrink-0"><line x1="12" y1="3" x2="12" y2="9"/><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg>` : ''}
+                            <span class="chat-title-text text-sm truncate flex-1 ${isSelected ? 'text-[#3964FE] font-medium' : 'text-gray-700'}">${escapeHtml(chat.title)}</span>
+                        </div>
+                        <button class="three-dots-trigger opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-gray-600 transition-opacity" onclick="showChatMenu(event, ${chat.id})">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                        </button>
                     </div>
-                    <button class="three-dots-trigger opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-gray-600 transition-opacity" onclick="showChatMenu(event, ${chat.id})">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                    </button>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function switchChat(id) {
@@ -444,7 +457,7 @@
                 bottomAnchor.appendChild(inputArea);
             }
             renderMessages();
-            renderHistory();
+            renderHistory(); // 重新渲染侧边栏以高亮选中项
         }
 
         function createNewChat() {
@@ -459,7 +472,7 @@
                 inputRoot.appendChild(inputArea);
             }
             document.getElementById('chat-messages').innerHTML = '';
-            renderHistory();
+            renderHistory(); // 刷新侧边栏选中样式（清空高亮）
             const inputEl = document.getElementById('user-input');
             if (inputEl) inputEl.value = '';
             handleInput(inputEl);
