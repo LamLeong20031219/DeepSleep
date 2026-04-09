@@ -2,16 +2,43 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>DeepSleep - 深度睡眠</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #ffffff; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            background-color: #ffffff; 
+        }
         
-        .sidebar-transition { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s; }
-        .sidebar-hidden { width: 0 !important; opacity: 0; overflow: hidden; border-right: none !important; }
+        /* 侧边栏过渡动画优化：支持宽度变化 + 平滑显示/隐藏，且修复收起后无法展开的问题 */
+    .sidebar-transition {
+        transition: width 0.2s ease-out, opacity 0.15s ease-out;
+        }
+        .sidebar-hidden {
+            width: 0px !important;
+            min-width: 0px !important;
+            opacity: 0;
+            overflow: hidden;
+            border-right-width: 0px !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            margin: 0 !important;
+            pointer-events: none;
+        }
+        /* 侧边栏内部内容在隐藏时也避免点击穿透干扰，但展开时恢复 */
+        .sidebar-hidden * {
+            pointer-events: none;
+        }
+        /* 确保展开时内部可交互 */
+        #sidebar:not(.sidebar-hidden) * {
+            pointer-events: auto;
+        }
         
         .input-shadow { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04); transition: box-shadow 0.3s ease; }
         .input-shadow:focus-within { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); }
@@ -24,6 +51,7 @@
 
         .feature-btn.active { background-color: #ecefff !important; border-color: #d1dbff !important; color: #2563eb !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
         .three-dots-menu {
             position: fixed;
@@ -34,6 +62,7 @@
             z-index: 1000;
             border: 1px solid #e5e7eb;
             overflow: hidden;
+            backdrop-filter: blur(0px);
         }
         .three-dots-menu-item {
             padding: 8px 16px;
@@ -63,16 +92,15 @@
             margin-bottom: 16px;
         }
         .message-user .bubble {
-            background-color: #EDF3FE;  /* 新要求浅蓝底 #EDF3FE */
+            background-color: #EDF3FE;
             padding: 10px 16px;
             border-radius: 18px;
             max-width: 85%;
             font-size: 15px;
             line-height: 1.5;
-            color: #1f2937;  /* 黑色文字 */
+            color: #1f2937;
             border: 1px solid #dce7fc;
         }
-        /* 机器人消息：完全无背景，直接输出，无灰色底，纯黑文字 */
         .message-bot {
             display: flex;
             justify-content: flex-start;
@@ -91,11 +119,8 @@
             white-space: pre-wrap;
             word-break: break-word;
         }
-        .message-bot {
-            white-space: pre-wrap;
-        }
         
-        /* 侧边栏选中样式：按照要求 选中时背景 #E4EDFE，文字颜色 #3964FE */
+        /* 侧边栏选中样式: 选中时背景 #E4EDFE，文字颜色 #3964FE */
         .chat-item-selected {
             background-color: #E4EDFE !important;
             border-radius: 0.5rem;
@@ -107,18 +132,35 @@
         .chat-item:not(.chat-item-selected):hover {
             background-color: #f3f4f6;
         }
+        /* 顶部按钮区域间距优化 */
+        .menu-icon-btn {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        /* 修复textarea滚动条 */
+        textarea {
+            scrollbar-width: thin;
+        }
+        /* 保证底部输入框移动端友好 */
+        #bottom-input-anchor .input-shadow {
+            margin-bottom: 0;
+        }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden text-gray-800">
+<body class="flex h-screen overflow-hidden text-gray-800 bg-white">
 
-    <aside id="sidebar" class="sidebar-transition w-[260px] h-full bg-[#f9f9f9] border-r border-gray-200 flex flex-col flex-shrink-0 relative z-30">
-        <div class="px-4 pt-5 pb-3 flex items-center justify-between cursor-pointer" onclick="createNewChat()">
-            <div class="flex items-center gap-2">
+    <aside id="sidebar" class="sidebar-transition w-[260px] min-w-[260px] h-full bg-[#f9f9f9] border-r border-gray-200 flex flex-col flex-shrink-0 relative z-30">
+        <div class="px-4 pt-5 pb-3 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="createNewChat()">
                 <img src="https://www.deepseek.com/favicon.ico" alt="DeepSeek" class="w-7 h-7">
                 <span class="text-[22px] font-semibold tracking-tight text-[#2563eb]">DeepSleep</span>
             </div>
-            <button onclick="event.stopPropagation(); toggleSidebar()" class="text-gray-400 hover:text-gray-600 p-1">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+            <!-- 侧边栏折叠按钮 - 完全修复展开/收起逻辑 -->
+            <button id="sidebarToggleBtn" onclick="toggleSidebar()" class="text-gray-400 hover:text-gray-600 p-1 rounded-full transition-colors" aria-label="收起侧边栏">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                </svg>
             </button>
         </div>
 
@@ -134,6 +176,17 @@
     </aside>
 
     <main class="flex-1 flex flex-col h-full relative bg-white z-10">
+        <!-- 当侧边栏收起时，增加一个悬浮展开按钮 (解决收起后无法打开的核心改进) -->
+        <button id="floatingExpandBtn" onclick="expandSidebarFromFloating()" 
+            class="fixed left-3 top-5 z-40 bg-white shadow-md rounded-full p-2 border border-gray-200 text-gray-600 hover:bg-gray-50 transition-all hidden"
+            style="display: none;"
+            aria-label="展开侧边栏">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+            </svg>
+        </button>
+
         <div id="center-container" class="flex-1 flex flex-col items-center justify-center w-full px-4 transform -translate-y-8">
             <div class="w-full max-w-[800px] flex flex-col items-center">
                 <div class="flex items-center gap-3 mb-6">
@@ -197,6 +250,7 @@
         let activeMenuId = null;
         let isWaitingResponse = false;
 
+        // 关闭所有右键菜单
         function closeAllMenus() {
             const existingMenu = document.querySelector('.three-dots-menu');
             if (existingMenu) existingMenu.remove();
@@ -227,7 +281,56 @@
         }
 
         function toggleFeature(btn) { btn.classList.toggle('active'); }
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('sidebar-hidden'); }
+        
+        // 核心修复：toggleSidebar 控制收起/展开 + 控制悬浮按钮显示
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const floatingBtn = document.getElementById('floatingExpandBtn');
+            const isHidden = sidebar.classList.contains('sidebar-hidden');
+            
+            if (isHidden) {
+                // 展开侧边栏
+                sidebar.classList.remove('sidebar-hidden');
+                if (floatingBtn) floatingBtn.style.display = 'none';
+                // 恢复侧边栏内的指针事件 (通过css已处理)
+            } else {
+                // 收起侧边栏
+                sidebar.classList.add('sidebar-hidden');
+                if (floatingBtn) floatingBtn.style.display = 'flex';
+            }
+            // 确保宽度重置时无残留样式
+            if (!sidebar.classList.contains('sidebar-hidden')) {
+                sidebar.style.width = '';
+                sidebar.style.minWidth = '';
+            }
+        }
+        
+        // 悬浮按钮展开侧边栏（同时隐藏自身）
+        function expandSidebarFromFloating() {
+            const sidebar = document.getElementById('sidebar');
+            const floatingBtn = document.getElementById('floatingExpandBtn');
+            if (sidebar.classList.contains('sidebar-hidden')) {
+                sidebar.classList.remove('sidebar-hidden');
+            }
+            if (floatingBtn) floatingBtn.style.display = 'none';
+            // 重置侧边栏样式
+            sidebar.style.width = '';
+            sidebar.style.minWidth = '';
+        }
+
+        // 监听侧边栏折叠状态，在窗口resize时若侧边栏隐藏但窗口变宽，可自适应，同时悬浮按钮状态同步
+        function syncFloatingButton() {
+            const sidebar = document.getElementById('sidebar');
+            const floatingBtn = document.getElementById('floatingExpandBtn');
+            if (sidebar && floatingBtn) {
+                if (sidebar.classList.contains('sidebar-hidden')) {
+                    floatingBtn.style.display = 'flex';
+                } else {
+                    floatingBtn.style.display = 'none';
+                }
+            }
+        }
+        window.addEventListener('resize', syncFloatingButton);
 
         function renameChat(chatId) {
             const chat = chats.find(c => c.id === chatId);
@@ -252,7 +355,7 @@
         function shareChat(chatId) {
             const chat = chats.find(c => c.id === chatId);
             if (chat) {
-                const shareText = `DeepSeek 对话分享: ${chat.title} (共 ${chat.messages.length} 条消息)`;
+                const shareText = `DeepSeep 对话分享: ${chat.title} (共 ${chat.messages.length} 条消息)`;
                 navigator.clipboard.writeText(shareText).then(() => {
                     alert('对话信息已复制到剪贴板，可分享给好友！');
                 }).catch(() => {
@@ -272,35 +375,20 @@
         function showChatMenu(event, chatId) {
             event.stopPropagation();
             closeAllMenus();
-            
             const triggerBtn = event.currentTarget;
             const rect = triggerBtn.getBoundingClientRect();
-            
             const menuDiv = document.createElement('div');
             menuDiv.className = 'three-dots-menu';
-            menuDiv.setAttribute('data-chat-id', chatId);
-            
             let left = rect.right - 140;
             let top = rect.bottom + 4;
-            
-            if (left + 140 > window.innerWidth) {
-                left = rect.right - 140;
-            }
-            if (left < 0) {
-                left = rect.left;
-            }
-            
-            if (top + 200 > window.innerHeight) {
-                top = rect.top - 200;
-                if (top < 0) top = 4;
-            }
-            
+            if (left + 140 > window.innerWidth) left = rect.right - 140;
+            if (left < 0) left = rect.left;
+            if (top + 200 > window.innerHeight) top = rect.top - 200;
+            if (top < 0) top = 4;
             menuDiv.style.left = `${left}px`;
             menuDiv.style.top = `${top}px`;
-            
             const chatData = chats.find(c => c.id === chatId);
             const pinText = chatData && chatData.pinned ? '取消置顶' : '置顶';
-            
             menuDiv.innerHTML = `
                 <div class="three-dots-menu-item" data-action="rename">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3l4 4-7 7H10v-4l7-7z"/><path d="M4 20h16"/></svg>
@@ -319,27 +407,12 @@
                     删除
                 </div>
             `;
-            
             document.body.appendChild(menuDiv);
             activeMenuId = chatId;
-            
-            menuDiv.querySelector('[data-action="rename"]').addEventListener('click', (e) => {
-                e.stopPropagation();
-                renameChat(chatId);
-            });
-            menuDiv.querySelector('[data-action="pin"]').addEventListener('click', (e) => {
-                e.stopPropagation();
-                togglePinChat(chatId);
-            });
-            menuDiv.querySelector('[data-action="share"]').addEventListener('click', (e) => {
-                e.stopPropagation();
-                shareChat(chatId);
-            });
-            menuDiv.querySelector('[data-action="delete"]').addEventListener('click', (e) => {
-                e.stopPropagation();
-                deleteChat(chatId);
-            });
-            
+            menuDiv.querySelector('[data-action="rename"]').addEventListener('click', (e) => { e.stopPropagation(); renameChat(chatId); });
+            menuDiv.querySelector('[data-action="pin"]').addEventListener('click', (e) => { e.stopPropagation(); togglePinChat(chatId); });
+            menuDiv.querySelector('[data-action="share"]').addEventListener('click', (e) => { e.stopPropagation(); shareChat(chatId); });
+            menuDiv.querySelector('[data-action="delete"]').addEventListener('click', (e) => { e.stopPropagation(); deleteChat(chatId); });
             menuDiv.addEventListener('click', (e) => e.stopPropagation());
         }
 
@@ -347,9 +420,7 @@
             const chat = chats.find(c => c.id === chatId);
             if (chat) {
                 chat.messages.push({ role: 'bot', content: replyText });
-                if (currentId === chatId) {
-                    renderMessages();
-                }
+                if (currentId === chatId) renderMessages();
                 renderHistory();
             }
         }
@@ -357,55 +428,40 @@
         function sendMessage() {
             const input = document.getElementById('user-input');
             const text = input.value.trim();
-            if(!text || isWaitingResponse) return;
-
+            if (!text || isWaitingResponse) return;
             if (currentId === null) {
                 currentId = Date.now();
                 chats.push({ id: currentId, title: text.slice(0, 12), messages: [], pinned: false });
             }
-
             const activeChat = chats.find(c => c.id === currentId);
             activeChat.messages.push({ role: 'user', content: text });
-
             document.getElementById('center-container').classList.add('hidden');
             document.getElementById('chat-messages-container').classList.remove('hidden');
             document.getElementById('bottom-input-wrapper').classList.remove('hidden');
-            
             const inputArea = document.getElementById('input-area-main');
             const bottomAnchor = document.getElementById('bottom-input-anchor');
-            if (inputArea && bottomAnchor && !bottomAnchor.contains(inputArea)) {
-                bottomAnchor.appendChild(inputArea);
-            }
-            
+            if (inputArea && bottomAnchor && !bottomAnchor.contains(inputArea)) bottomAnchor.appendChild(inputArea);
             input.value = '';
             handleInput(input);
             renderMessages();
             renderHistory();
-            
             isWaitingResponse = true;
             setTimeout(() => {
                 addBotReply(currentId, `哈哈，被你发现了（并没有）！😏\n\n你成功召唤的不是DeepSeek，而是**DeepSleep深度睡眠** 一个擅长打盹、偶尔胡言乱语的冒牌货～\n\n真正的聪明蛋在隔壁 👉 https://deepseek.com`);
                 isWaitingResponse = false;
                 const scrollArea = document.getElementById('chat-messages-container');
-                if (scrollArea) {
-                    scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
-                }
+                if (scrollArea) scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
             }, 500);
         }
 
         function renderMessages() {
             const container = document.getElementById('chat-messages');
             const activeChat = chats.find(c => c.id === currentId);
-            if(!activeChat) return;
-
+            if (!activeChat) return;
             container.innerHTML = activeChat.messages.map(m => {
-                if (m.role === 'user') {
-                    return `<div class="message-user"><div class="bubble">${escapeHtml(m.content)}</div></div>`;
-                } else {
-                    return `<div class="message-bot"><div class="bubble">${escapeHtml(m.content)}</div></div>`;
-                }
+                if (m.role === 'user') return `<div class="message-user"><div class="bubble">${escapeHtml(m.content)}</div></div>`;
+                else return `<div class="message-bot"><div class="bubble">${escapeHtml(m.content)}</div></div>`;
             }).join('');
-            
             const scrollArea = document.getElementById('chat-messages-container');
             if (scrollArea) scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
         }
@@ -419,7 +475,6 @@
             }).replace(/\n/g, '<br>');
         }
 
-        // 核心：侧边栏选中样式 #E4EDFE 背景 + #3964FE 文字
         function renderHistory() {
             const container = document.getElementById('chat-history-container');
             const sortedChats = [...chats].sort((a, b) => {
@@ -427,12 +482,11 @@
                 if (!a.pinned && b.pinned) return 1;
                 return b.id - a.id;
             });
-            
             container.innerHTML = sortedChats.map(chat => {
                 const isSelected = (chat.id === currentId);
                 const selectedClass = isSelected ? 'chat-item-selected' : '';
                 return `
-                    <div class="chat-item group flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-[#f0f2f5] cursor-pointer mb-1 transition-all ${selectedClass}" data-chat-id="${chat.id}" style="position: relative;">
+                    <div class="chat-item group flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-[#f0f2f5] cursor-pointer mb-1 transition-all ${selectedClass}" data-chat-id="${chat.id}">
                         <div class="flex items-center gap-1 flex-1 min-w-0" onclick="switchChat(${chat.id})">
                             ${chat.pinned ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3964FE" stroke-width="2" class="flex-shrink-0"><line x1="12" y1="3" x2="12" y2="9"/><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg>` : ''}
                             <span class="chat-title-text text-sm truncate flex-1 ${isSelected ? 'text-[#3964FE] font-medium' : 'text-gray-700'}">${escapeHtml(chat.title)}</span>
@@ -453,11 +507,9 @@
             document.getElementById('bottom-input-wrapper').classList.remove('hidden');
             const inputArea = document.getElementById('input-area-main');
             const bottomAnchor = document.getElementById('bottom-input-anchor');
-            if (inputArea && bottomAnchor && !bottomAnchor.contains(inputArea)) {
-                bottomAnchor.appendChild(inputArea);
-            }
+            if (inputArea && bottomAnchor && !bottomAnchor.contains(inputArea)) bottomAnchor.appendChild(inputArea);
             renderMessages();
-            renderHistory(); // 重新渲染侧边栏以高亮选中项
+            renderHistory();
         }
 
         function createNewChat() {
@@ -468,17 +520,16 @@
             document.getElementById('bottom-input-wrapper').classList.add('hidden');
             const inputArea = document.getElementById('input-area-main');
             const inputRoot = document.getElementById('input-root');
-            if (inputArea && inputRoot && !inputRoot.contains(inputArea)) {
-                inputRoot.appendChild(inputArea);
-            }
+            if (inputArea && inputRoot && !inputRoot.contains(inputArea)) inputRoot.appendChild(inputArea);
             document.getElementById('chat-messages').innerHTML = '';
-            renderHistory(); // 刷新侧边栏选中样式（清空高亮）
+            renderHistory();
             const inputEl = document.getElementById('user-input');
             if (inputEl) inputEl.value = '';
             handleInput(inputEl);
             isWaitingResponse = false;
         }
 
+        // 挂载全局
         window.showChatMenu = showChatMenu;
         window.renameChat = renameChat;
         window.togglePinChat = togglePinChat;
@@ -491,8 +542,10 @@
         window.toggleFeature = toggleFeature;
         window.toggleSidebar = toggleSidebar;
         window.handleInput = handleInput;
-        
+        window.expandSidebarFromFloating = expandSidebarFromFloating;
+
         renderHistory();
+        syncFloatingButton();
     </script>
 </body>
 </html>
