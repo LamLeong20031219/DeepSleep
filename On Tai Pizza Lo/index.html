@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-HK">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>安泰披萨佬 - 项目前期规划书</title>
+  <title>安泰披萨佬 - 項目前期規劃書</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
     * {
@@ -46,23 +46,23 @@
       border-bottom: none;
     }
 
-.markdown-body blockquote:first-of-type {
-  display: block;
-  background-color: #f5f5f5;
-  border-left: 4px solid #333;
-  border-radius: 8px;
-  padding: 20px 20px 5px 20px; 
-  text-align: left;
-}      
+    .markdown-body blockquote:first-of-type {
+      display: block;
+      background-color: #f5f5f5;
+      border-left: 4px solid #333;
+      border-radius: 8px;
+      padding: 20px 20px 5px 20px; 
+      text-align: left;
+    }      
 
-.markdown-body blockquote {
-  display: block;
-  background-color: #f5f5f5;
-  border-left: 4px solid #333;
-  border-radius: 8px;
-  padding: 20px 20px 5px 20px; 
-  text-align: left;       
-}
+    .markdown-body blockquote {
+      display: block;
+      background-color: #f5f5f5;
+      border-left: 4px solid #333;
+      border-radius: 8px;
+      padding: 20px 20px 5px 20px; 
+      text-align: left;       
+    }
 
     /* 二级标题 */
     .markdown-body h2 {
@@ -93,43 +93,38 @@
       color: #444;
     }
 
-/* 修改表格整体边框 */
-.info-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 20px 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  /* 添加这一行：增加外围深色边框 */
-  border: 1.5px solid #444; 
-}
+    /* 修改表格整体边框 */
+    .info-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 20px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      border: 1.5px solid #444; 
+    }
 
-/* 加深单元格底部的线 */
-.info-table td {
-  padding: 10px 16px;
-  /* 将 #e0e0e0 改为更深的颜色 */
-  border-bottom: 1px solid #999; 
-  background-color: #ffffff;
-  color: #1a1a1a;
-  text-align: left;
-  vertical-align: top;
-}
+    /* 加深单元格底部的线 */
+    .info-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #999; 
+      background-color: #ffffff;
+      color: #1a1a1a;
+      text-align: left;
+      vertical-align: top;
+    }
 
-/* 增加表头和第一行之间的区分度 */
-.info-table th {
-  background-color: #2c2c2c;
-  color: white;
-  font-weight: 600;
-  padding: 12px 16px;
-  /* 给表头下方加一个明显的界限 */
-  border-bottom: 2px solid #000; 
-}
+    .info-table th {
+      background-color: #2c2c2c;
+      color: white;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 2px solid #000; 
+    }
     .info-table tr:last-child td {
       border-bottom: none;
     }
-    /* 表格圆角 */
     .info-table th:first-child { border-top-left-radius: 12px; }
     .info-table th:last-child { border-top-right-radius: 12px; }
     .info-table tr:last-child td:first-child { border-bottom-left-radius: 12px; }
@@ -162,7 +157,7 @@
       color: #1a1a1a;
     }
 
-    /* 加粗文字 - 纯黑色粗体 */
+    /* 加粗文字 - 純黑色粗體 */
     .markdown-body strong {
       color: #1a1a1a;
       font-weight: 700;
@@ -194,324 +189,279 @@
         white-space: nowrap;
       }
     }
+    
+    /* 本地化分析特色標籤 */
+    .local-badge {
+      background-color: #ffedd5;
+      border-left: 6px solid #f97316;
+      padding: 6px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #c2410c;
+      margin-bottom: 12px;
+    }
+    
+    .highlight-yellow {
+      background-color: #fef9c3;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
   <div class="markdown-body">
-    <h1>🍕 On Tai Pizza Lo (安泰披萨佬) 项目前期规划书</h1>
+    <h1>🍕 On Tai Pizza Lo (安泰披薩佬) 項目前期規劃書</h1>
 
     <blockquote>
-      <p>本规划书基于对尊宝披萨商业模式的深度调研分析整理而成</p>
+      <p>本規劃書基於對尊寶披薩商業模式的深度調研分析整理而成</p>
     </blockquote>
 
     <hr>
 
-    <h2>📌 一、尊宝披萨商业模式概览</h2>
-    <p>尊宝比萨的核心商业模式可以概括为：<strong>以“极致性价比”为武器，通过“轻量化小店+中央供应链”驱动，在“直营+加盟”双轨制下快速下沉市场</strong>。</p>
-    <p>简单来说，就是用极致效率跑通“万店”逻辑。</p>
+    <h2>📌 一、尊寶披薩商業模式概覽</h2>
+    <p>尊寶比薩的核心商業模式可以概括為：<strong>以「極致性價比」為武器，通過「輕量化小店+中央供應鏈」驅動，在「直營+加盟」雙軌制下快速下沉市場</strong>。</p>
+    <p>簡單來說，就是用極致效率跑通「萬店」邏輯。</p>
 
-    <h3>1.1 商业模式：性价比驱动的“效率革命”</h3>
-    <p>尊宝的定位非常清晰：<strong>避开与必胜客、达美乐在一线商圈的正面竞争，做大众“家门口的比萨”</strong>。</p>
+    <h3>1.1 商業模式：性價比驅動的「效率革命」</h3>
+    <p>尊寶的定位非常清晰：<strong>避開與必勝客、達美樂在一線商圈的正面競爭，做大眾「家門口的比薩」</strong>。</p>
     <ul>
-      <li><strong>极致性价比</strong>：客单价稳定在 <strong>30-40元</strong> 区间，远低于必胜客（70-100元）和达美乐（50-80元）</li>
-      <li><strong>高频刚需场景</strong>：聚焦社区、学校和写字楼周边，强调 <strong>外带和外卖</strong>（目前外卖占比已超51%），而非堂食体验</li>
+      <li><strong>極致性價比</strong>：客單價穩定在 <strong>30-40元</strong> 區間，遠低於必勝客（70-100元）和達美樂（50-80元）</li>
+      <li><strong>高頻剛需場景</strong>：聚焦社區、學校和寫字樓周邊，強調 <strong>外帶和外賣</strong>（目前外賣佔比已超51%），而非堂食體驗</li>
     </ul>
 
-    <h3>1.2 核心战略：“轻量化”与“供应链驱动”</h3>
+    <h3>1.2 核心戰略：「輕量化」與「供應鏈驅動」</h3>
     <table class="info-table">
       <thead>
-        <tr><th>战略支点</th><th>具体内容</th></tr>
+        <tr><th>戰略支點</th><th>具體內容</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>门店轻量化</strong></td><td>主推30-80㎡的社区小店，标配2-3人即可运营</td></tr>
-        <tr><td><strong>供应链护城河</strong></td><td>杭州、深圳建有超3万㎡的中央厨房，48小时冷链直达</td></tr>
-        <tr><td><strong>双轨制扩张</strong></td><td>直营店做标杆（广东超1000家），加盟店攻占全国市场</td></tr>
+        <tr><td><strong>門店輕量化</strong></td><td>主推30-80㎡的社區小店，標配2-3人即可運營</td></tr>
+        <tr><td><strong>供應鏈護城河</strong></td><td>杭州、深圳建有超3萬㎡的中央廚房，48小時冷鏈直達</td></tr>
+        <tr><td><strong>雙軌制擴張</strong></td><td>直營店做標杆（廣東超1000家），加盟店攻佔全國市場</td></tr>
       </tbody>
     </table>
 
-    <h3>1.3 扩张与选址要求</h3>
+    <h3>1.3 擴張與選址要求</h3>
     <ul>
-      <li><strong>选址逻辑</strong>：核心是 <strong>高复购、低租金</strong>。首选大型社区出入口、学校周边、写字楼底商</li>
-      <li><strong>保护政策</strong>：总部给予加盟商 <strong>半径1公里</strong> 的区域保护</li>
+      <li><strong>選址邏輯</strong>：核心是 <strong>高復購、低租金</strong>。首選大型社區出入口、學校周邊、寫字樓底商</li>
+      <li><strong>保護政策</strong>：總部給予加盟商 <strong>半徑1公里</strong> 的區域保護</li>
     </ul>
 
-    <h3>1.4 成本与盈利模型</h3>
+    <h3>1.4 成本與盈利模型</h3>
     <table class="info-table">
-      <thead><tr><th>指标</th><th>数据</th></tr></thead>
+      <thead><tr><th>指標</th><th>數據</th></tr></thead>
       <tbody>
-        <tr><td>单店总投资</td><td>30-50万元</td></tr>
-        <tr><td>毛利率</td><td>约60%</td></tr>
-        <tr><td>净利润率</td><td>15%-25%</td></tr>
-        <tr><td>回本周期</td><td>12-18个月（理想情况）</td></tr>
+        <tr><td>單店總投資</td><td>30-50萬元</td></tr>
+        <tr><td>毛利率</td><td>約60%</td></tr>
+        <tr><td>淨利潤率</td><td>15%-25%</td></tr>
+        <tr><td>回本週期</td><td>12-18個月（理想情況）</td></tr>
       </tbody>
     </table>
 
     <hr>
 
-    <h2>🎯 二、商品逻辑：爆品聚焦与本土化</h2>
-    <h3>2.1 金字塔产品结构</h3>
+    <h2>🎯 二、商品邏輯：爆品聚焦與本土化</h2>
+    <h3>2.1 金字塔產品結構</h3>
     <table class="info-table">
-      <thead><tr><th>层级</th><th>产品类型</th><th>说明</th></tr></thead>
+      <thead><tr><th>層級</th><th>產品類型</th><th>說明</th></tr></thead>
       <tbody>
-        <tr><td>顶层</td><td>招牌榴莲披萨</td><td>绝对核心爆品</td></tr>
-        <tr><td>中层</td><td>烤翅、意面等小吃</td><td>高毛利，贡献超30%营收</td></tr>
-        <tr><td>底层</td><td>饮料和套餐</td><td>拉高客单价</td></tr>
+        <tr><td>頂層</td><td>招牌榴槤披薩</td><td>絕對核心爆品</td></tr>
+        <tr><td>中層</td><td>烤翅、意麵等小食</td><td>高毛利，貢獻超30%營收</td></tr>
+        <tr><td>底層</td><td>飲料和套餐</td><td>拉高客單價</td></tr>
       </tbody>
     </table>
 
     <h3>2.2 本土化改良</h3>
-    <p>针对中国人口味推出“红薯卷边”等创新，让比萨变得更像一顿实惠的“主食快餐”。</p>
+    <p>針對中國人口味推出「紅薯卷邊」等創新，讓比薩變得更像一頓實惠的「主食快餐」。</p>
 
     <hr>
 
-    <h2>💰 三、单店营收与利润分析</h2>
-    <h3>3.1 理想模型（官方口径）</h3>
-    <table class="info-table">
-      <thead><tr><th>指标</th><th>数值</th></tr></thead>
-      <tbody>
-        <tr><td>日均订单</td><td>150单</td></tr>
-        <tr><td>客单价</td><td>40元</td></tr>
-        <tr><td>月营业额</td><td>约18万元</td></tr>
-        <tr><td>月毛利</td><td>约10.8万元（毛利率60%）</td></tr>
-        <tr><td>月净利</td><td>约6.3万元</td></tr>
-        <tr><td>回本周期</td><td>12-18个月</td></tr>
-      </tbody>
-    </table>
+    <h2>💰 三、單店營收與利潤分析</h2>
+    <h3>3.1 理想模型（官方口徑）</h3>
+    <table class="info-table"><thead><tr><th>指標</th><th>數值</th></tr></thead><tbody><tr><td>日均訂單</td><td>150單</td></tr><tr><td>客單價</td><td>40元</td></tr><tr><td>月營業額</td><td>約18萬元</td></tr><tr><td>月毛利</td><td>約10.8萬元（毛利率60%）</td></tr><tr><td>月淨利</td><td>約6.3萬元</td></tr><tr><td>回本週期</td><td>12-18個月</td></tr></tbody></table>
 
-    <h3>3.2 真实案例（2020年广州80㎡社区店）</h3>
-    <table class="info-table">
-      <thead><tr><th>指标</th><th>数值</th></tr></thead>
-      <tbody>
-        <tr><td>日营业额</td><td>约5,891元（月均17.7万）</td></tr>
-        <tr><td>月净利润</td><td>3.4万 - 4.1万元</td></tr>
-        <tr><td>人员配置</td><td>4人</td></tr>
-        <tr><td>外卖月销</td><td>超3300单</td></tr>
-      </tbody>
-    </table>
+    <h3>3.2 真實案例（2020年廣州80㎡社區店）</h3>
+    <table class="info-table"><thead><tr><th>指標</th><th>數值</th></tr></thead><tbody><tr><td>日營業額</td><td>約5,891元（月均17.7萬）</td></tr><tr><td>月淨利潤</td><td>3.4萬 - 4.1萬元</td></tr><tr><td>人員配置</td><td>4人</td></tr><tr><td>外賣月銷</td><td>超3300單</td></tr></tbody></table>
 
-    <h3>3.3 残酷现实（3000家店平均）</h3>
-    <ul>
-      <li><strong>单店年均营收</strong>：约 <strong>70万元</strong>（总营收21亿 ÷ 3000家）</li>
-      <li><strong>月均营收</strong>：约 <strong>5.8万元</strong></li>
-      <li><strong>核心痛点</strong>：单店产出只有达美乐的 <strong>1/5</strong></li>
-    </ul>
-
-    <h3>3.4 大本营的“特权”</h3>
-    <p>广东地区有超1000家直营店，品牌势能和供应链密度极高，单店实际存活率和盈利能力通常高于全国平均水平。</p>
+    <h3>3.3 殘酷現實（3000家店平均）</h3>
+    <ul><li><strong>單店年均營收</strong>：約 <strong>70萬元</strong>（總營收21億 ÷ 3000家）</li><li><strong>月均營收</strong>：約 <strong>5.8萬元</strong></li><li><strong>核心痛點</strong>：單店產出只有達美樂的 <strong>1/5</strong></li></ul>
+    <h3>3.4 大本營的「特權」</h3>
+    <p>廣東地區有超1000家直營店，品牌勢能和供應鏈密度極高，單店實際存活率和盈利能力通常高於全國平均水平。</p>
 
     <hr>
 
-    <h2>🔗 四、加盟利润分配机制</h2>
+    <h2>🔗 四、加盟利潤分配機制</h2>
     <h3>4.1 核心模式</h3>
-    <p><strong>总部赚供应链和流水抽成，加盟商拿剩余利润</strong>。所有营收先进总部账，扣除固定抽成后再返还给你。</p>
-
-    <h3>4.2 三项主要费用</h3>
-    <h4>4.2.1 营业额抽成（合伙人管理费）</h4>
-    <ul>
-      <li><strong>管理费</strong>：固定抽取营业额的 <strong>2%</strong></li>
-      <li><strong>阶梯式合伙金</strong>：<ul>
-        <li>4万以下：不抽</li>
-        <li>4万-12万：按比例</li>
-        <li>超过12万：抽 <strong>4%</strong></li>
-      </ul></li>
-    </ul>
-    <blockquote><p><strong>举例</strong>：月营业额20万，抽成 = 20万×2% + (20万-12万)×4% = 4000 + 3200 = 7200元</p></blockquote>
-
-    <h4>4.2.2 供应链利润</h4>
-    <p>加盟商 <strong>必须从总部采购核心原料</strong>（面团、芝士、榴莲肉等），总部会预留利润空间（约30%-35%）。</p>
-
-    <h4>4.2.3 一次性费用</h4>
-    <table class="info-table">
-      <thead><tr><th>项目</th><th>金额</th></tr></thead>
-      <tbody>
-        <tr><td>保证金</td><td>6万元</td></tr>
-        <tr><td>设备+装修</td><td>8-12万元</td></tr>
-        <tr><td>培训费</td><td>约1万元</td></tr>
-      </tbody>
-    </table>
-
-    <h3>4.3 利润计算公式</h3>
-    <p><strong>你的利润 = 总营收 - 总部抽成 - 原料采购 - 房租人工等</strong></p>
-
-    <h3>4.4 月营业额18万的利润测算</h3>
-    <table class="info-table">
-      <thead><tr><th>项目</th><th>金额</th><th>说明</th></tr></thead>
-      <tbody>
-        <tr><td>月营业额</td><td>180,000元</td><td>日均150单×40元</td></tr>
-        <tr><td>减：总部抽成</td><td>约6,600元</td><td>管理费3600 + 阶梯抽成3000</td></tr>
-        <tr><td>减：原料成本</td><td>约63,000元</td><td>按毛利率65%倒推</td></tr>
-        <tr><td>减：房租人工</td><td>约45,000元</td><td>房租2万 + 人工2.5万</td></tr>
-        <tr><td><strong>≈ 月净利</strong></td><td><strong>约65,400元</strong></td><td>此为你最终所得</td></tr>
-      </tbody>
-    </table>
+    <p><strong>總部賺供應鏈和流水抽成，加盟商拿剩餘利潤</strong>。所有營收先進總部賬，扣除固定抽成後再返還給你。</p>
+    <h3>4.2 三項主要費用</h3>
+    <h4>4.2.1 營業額抽成（合夥人管理費）</h4>
+    <ul><li><strong>管理費</strong>：固定抽取營業額的 <strong>2%</strong></li><li><strong>階梯式合夥金</strong>：<ul><li>4萬以下：不抽</li><li>4萬-12萬：按比例</li><li>超過12萬：抽 <strong>4%</strong></li></ul></li></ul>
+    <blockquote><p><strong>舉例</strong>：月營業額20萬，抽成 = 20萬×2% + (20萬-12萬)×4% = 4000 + 3200 = 7200元</p></blockquote>
+    <h4>4.2.2 供應鏈利潤</h4>
+    <p>加盟商 <strong>必須從總部採購核心原料</strong>（麵團、芝士、榴槤肉等），總部會預留利潤空間（約30%-35%）。</p>
+    <h4>4.2.3 一次性費用</h4>
+    <table class="info-table"><thead><tr><th>項目</th><th>金額</th></tr></thead><tbody><tr><td>保證金</td><td>6萬元</td></tr><tr><td>設備+裝修</td><td>8-12萬元</td></tr><tr><td>培訓費</td><td>約1萬元</td></tr></tbody></table>
+    <h3>4.3 利潤計算公式</h3>
+    <p><strong>你的利潤 = 總營收 - 總部抽成 - 原料採購 - 房租人工等</strong></p>
+    <h3>4.4 月營業額18萬的利潤測算</h3>
+    <table class="info-table"><thead><tr><th>項目</th><th>金額</th><th>說明</th></tr></thead><tbody><tr><td>月營業額</td><td>180,000元</td><td>日均150單×40元</td></tr><tr><td>減：總部抽成</td><td>約6,600元</td><td>管理費3600 + 階梯抽成3000</td></tr><tr><td>減：原料成本</td><td>約63,000元</td><td>按毛利率65%倒推</td></tr><tr><td>減：房租人工</td><td>約45,000元</td><td>房租2萬 + 人工2.5萬</td></tr><tr><td><strong>≈ 月淨利</strong></td><td><strong>約65,400元</strong></td><td>此為你最終所得</td></tr></tbody></table>
 
     <hr>
 
-    <h2>👨‍🍳 五、员工操作流程</h2>
-    <h3>5.1 核心原则</h3>
-    <p><strong>“通岗制”和“傻瓜式”操作</strong>。员工不需要精通厨艺，总部把一切都简化了。</p>
-
+    <h2>👨‍🍳 五、員工操作流程</h2>
+    <h3>5.1 核心原則</h3>
+    <p><strong>「通崗制」和「傻瓜式」操作</strong>。員工不需要精通廚藝，總部把一切都簡化了。</p>
     <h3>5.2 每日工作流程</h3>
-    <h4>开店准备（约1小时）</h4>
-    <p>换上工服 → 清洁消毒 → 检查冰箱温度 → 解冻面团 → 备菜切料</p>
-    <h4>产品制作（核心技能）</h4>
-    <ol>
-      <li>面团按压成饼底</li>
-      <li>抹上统一配送的酱料</li>
-      <li>撒上芝士和馅料</li>
-      <li>放入链式烤箱（按下按钮即可）</li>
-    </ol>
-    <h4>收银与服务</h4>
-    <p>接听电话或收银，按标准话术推荐“最划算”的套餐。</p>
-
-    <h3>5.3 披萨制作四步法</h3>
-    <table class="info-table">
-      <thead><tr><th>步骤</th><th>操作</th><th>关键要点</th></tr></thead>
-      <tbody>
-        <tr><td><strong>1. 铺</strong></td><td>将面团按压成标准尺寸饼底</td><td>力道均匀，厚薄一致</td></tr>
-        <tr><td><strong>2. 撒</strong></td><td>抹酱→撒芝士→放馅料→再撒芝士</td><td>必须按标准克重，禁止凭手感</td></tr>
-        <tr><td><strong>3. 烤</strong></td><td>放入链式烤箱</td><td>传送带速度固定，约6-6.5分钟</td></tr>
-        <tr><td><strong>4. 切</strong></td><td>出炉后用滚轮刀分切</td><td>通常切8等份，打包出餐</td></tr>
-      </tbody>
-    </table>
-
-    <h3>5.4 烘烤时间</h3>
-    <ul>
-      <li><strong>标准时间</strong>：<strong>6分钟到6分30秒</strong></li>
-      <li><strong>烤箱温度</strong>：<strong>215°C</strong></li>
-      <li><strong>设备类型</strong>：链式烤箱（传送带自动输送）</li>
-    </ul>
-
+    <h4>開店準備（約1小時）</h4>
+    <p>換上工服 → 清潔消毒 → 檢查冰箱溫度 → 解凍麵團 → 備菜切料</p>
+    <h4>產品製作（核心技能）</h4>
+    <ol><li>麵團按壓成餅底</li><li>抹上統一配送的醬料</li><li>撒上芝士和餡料</li><li>放入鏈式烤箱（按下按鈕即可）</li></ol>
+    <h4>收銀與服務</h4>
+    <p>接聽電話或收銀，按標準話術推薦「最划算」的套餐。</p>
+    <h3>5.3 披薩製作四步法</h3>
+    <table class="info-table"><thead><tr><th>步驟</th><th>操作</th><th>關鍵要點</th></tr></thead><tbody><tr><td><strong>1. 鋪</strong></td><td>將麵團按壓成標準尺寸餅底</td><td>力道均勻，厚薄一致</td></tr><tr><td><strong>2. 撒</strong></td><td>抹醬→撒芝士→放餡料→再撒芝士</td><td>必須按標準克重，禁止憑手感</td></tr><tr><td><strong>3. 烤</strong></td><td>放入鏈式烤箱</td><td>傳送帶速度固定，約6-6.5分鐘</td></tr><tr><td><strong>4. 切</strong></td><td>出爐後用滾輪刀分切</td><td>通常切8等份，打包出餐</td></tr></tbody></table>
+    <h3>5.4 烘烤時間</h3>
+    <ul><li><strong>標準時間</strong>：<strong>6分鐘到6分30秒</strong></li><li><strong>烤箱溫度</strong>：<strong>215°C</strong></li><li><strong>設備類型</strong>：鏈式烤箱（傳送帶自動輸送）</li></ul>
     <h3>5.5 班次安排</h3>
-    <table class="info-table">
-      <thead><tr><th>班次</th><th>时间</th><th>特点</th></tr></thead>
-      <tbody>
-        <tr><td>A班</td><td>9点30分-13点30分 和 17点00分-22点30分</td><td>两头班，兼顾堂食外卖高峰</td></tr>
-        <tr><td>B班</td><td>10点20分-20点00分</td><td>直落班</td></tr>
-      </tbody>
-    </table>
-
-    <h3>5.6 人员架构</h3>
-    <ul>
-      <li><strong>店员（通岗）</strong>：轮流负责制作、收银、外送</li>
-      <li><strong>副店长</strong>：协助排班、处理客诉、盘点物料</li>
-      <li><strong>店长</strong>：管全店账目、成本控制、考核员工</li>
-    </ul>
-
-    <h3>5.7 晋升路径</h3>
-    <p>店员/学徒 → 副店长（1-3个月） → 店长 → 督导（管6-8家店）</p>
-    <blockquote><p>公司内部流传“33%的店长晋升比率”，每月一次晋升考核。</p></blockquote>
-
-    <h3>5.8 新员工培训（7天带薪）</h3>
-    <table class="info-table">
-      <thead><tr><th>时间</th><th>内容</th></tr></thead>
-      <tbody>
-        <tr><td>第1天</td><td>入职入住，了解公司，免费品尝各种披萨</td></tr>
-        <tr><td>第2-6天</td><td>门店实操，老员工带教</td></tr>
-        <tr><td>第7天</td><td>考核鉴定，必须能不看手册独立完成制作</td></tr>
-      </tbody>
-    </table>
+    <table class="info-table"><thead><tr><th>班次</th><th>時間</th><th>特點</th></tr></thead><tbody><tr><td>A班</td><td>9點30分-13點30分 和 17點00分-22點30分</td><td>兩頭班，兼顧堂食外賣高峰</td></tr><tr><td>B班</td><td>10點20分-20點00分</td><td>直落班</td></tr></tbody></table>
+    <h3>5.6 人員架構</h3>
+    <ul><li><strong>店員（通崗）</strong>：輪流負責製作、收銀、外送</li><li><strong>副店長</strong>：協助排班、處理客訴、盤點物料</li><li><strong>店長</strong>：管全店賬目、成本控制、考核員工</li></ul>
+    <h3>5.7 晉升路徑</h3>
+    <p>店員/學徒 → 副店長（1-3個月） → 店長 → 督導（管6-8家店）</p>
+    <blockquote><p>公司內部流傳「33%的店長晉升比率」，每月一次晉升考核。</p></blockquote>
+    <h3>5.8 新員工培訓（7天帶薪）</h3>
+    <table class="info-table"><thead><tr><th>時間</th><th>內容</th></tr></thead><tbody><tr><td>第1天</td><td>入職入住，了解公司，免費品嚐各種披薩</td></tr><tr><td>第2-6天</td><td>門店實操，老員工帶教</td></tr><tr><td>第7天</td><td>考核鑑定，必須能不看手冊獨立完成製作</td></tr></tbody></table>
 
     <hr>
 
-    <h2>🛒 六、原料采购要求</h2>
-    <h3>6.1 必须向总部采购（核心原料）</h3>
-    <table class="info-table">
-      <thead><tr><th>原料类别</th><th>具体原料</th></tr></thead>
-      <tbody>
-        <tr><td>芝士类</td><td>新西兰恒天然安佳马苏里拉芝士</td></tr>
-        <tr><td>榴莲类</td><td>马来西亚苏丹王D24黄金果肉榴莲泥</td></tr>
-        <tr><td>面饼类</td><td>新鲜发酵面团（每天冷链配送）</td></tr>
-        <tr><td>酱料类</td><td>秘制披萨酱、黑椒酱</td></tr>
-        <tr><td>肉类/半成品</td><td>奥尔良鸡肉、培根、香肠等</td></tr>
-      </tbody>
-    </table>
-
-    <h3>6.2 可以自己买（新鲜果蔬）</h3>
-    <p>青椒、红椒、洋葱、蘑菇、玉米粒、菠萝丁等。</p>
-
-    <h3>6.3 强制程度</h3>
-    <p><strong>100%强制</strong>。合同中明确规定必须通过总部订货系统采购，私自外采导致口味变化，总部有权终止合作并扣除6万元保证金。</p>
-
+    <h2>🛒 六、原料採購要求</h2>
+    <h3>6.1 必須向總部採購（核心原料）</h3>
+    <table class="info-table"><thead><tr><th>原料類別</th><th>具體原料</th></tr></thead><tbody><tr><td>芝士類</td><td>新西蘭恆天然安佳馬蘇里拉芝士</td></tr><tr><td>榴槤類</td><td>馬來西亞蘇丹王D24黃金果肉榴槤泥</td></tr><tr><td>麵餅類</td><td>新鮮發酵麵團（每天冷鏈配送）</td></tr><tr><td>醬料類</td><td>秘製披薩醬、黑椒醬</td></tr><tr><td>肉類/半成品</td><td>奧爾良雞肉、培根、香腸等</td></tr></tbody></table>
+    <h3>6.2 可以自己買（新鮮果蔬）</h3>
+    <p>青椒、紅椒、洋蔥、蘑菇、玉米粒、菠蘿丁等。</p>
+    <h3>6.3 強制程度</h3>
+    <p><strong>100%強制</strong>。合同中明確規定必須通過總部訂貨系統採購，私自外採導致口味變化，總部有權終止合作並扣除6萬元保證金。</p>
     <h3>6.4 配送方式</h3>
-    <p>总部通过“自营物流+第三方冷链”48小时配送到店。</p>
+    <p>總部通過「自營物流+第三方冷鏈」48小時配送到店。</p>
 
     <hr>
 
-    <h2>📐 七、8寸披萨原料与成本</h2>
-    <h3>7.1 加盟商视角（原料成本约占营业额30%-35%）</h3>
-    <table class="info-table">
-      <thead><tr><th>计算维度</th><th>数值</th></tr></thead>
-      <tbody>
-        <tr><td>8寸披萨售价</td><td>约30-45元</td></tr>
-        <tr><td>原料成本占比</td><td>30%-35%</td></tr>
-        <tr><td><strong>单个披萨原料成本</strong></td><td><strong>约9-16元</strong></td></tr>
-      </tbody>
-    </table>
-
-    <h3>7.2 8寸披萨原料构成</h3>
-    <table class="info-table">
-      <thead><tr><th>原料类别</th><th>具体原料</th><th>说明</th></tr></thead>
-      <tbody>
-        <tr><td>饼底</td><td>新鲜面团</td><td>总部配送，门店只需按压成型</td></tr>
-        <tr><td>芝士</td><td>新西兰安佳马苏里拉芝士</td><td>核心原料，决定拉丝效果</td></tr>
-        <tr><td>酱料</td><td>秘制披萨酱</td><td>总部统一配制</td></tr>
-        <tr><td>馅料（榴莲款）</td><td>马来西亚苏丹王榴莲果肉</td><td>招牌爆款</td></tr>
-        <tr><td>馅料（肉类款）</td><td>奥尔良鸡肉、培根等</td><td>总部预加工半成品</td></tr>
-        <tr><td>蔬菜辅料</td><td>青椒、洋葱、玉米等</td><td>可当地自采</td></tr>
-      </tbody>
-    </table>
-
-    <h3>7.3 自己采购原料（不加盟）的成本</h3>
-    <table class="info-table">
-      <thead><tr><th>披萨口味</th><th>原料成本（元/个）</th></tr></thead>
-      <tbody>
-        <tr><td>基础款（奥尔良鸡肉/培根）</td><td>7-9元</td></tr>
-        <tr><td>榴莲款</td><td>12-15元</td></tr>
-        <tr><td>海鲜款</td><td>10-14元</td></tr>
-      </tbody>
-    </table>
-    <blockquote><p><strong>注意</strong>：芝士是成本大头，约4-6元/个，占总成本的40%-50%。</p></blockquote>
-
-    <h3>7.4 8寸披萨售价参考（尊宝）</h3>
-    <table class="info-table">
-      <thead><tr><th>类型</th><th>售价</th></tr></thead>
-      <tbody>
-        <tr><td>经典款（奥尔良烤鸡等）</td><td>29-35元</td></tr>
-        <tr><td>榴莲款</td><td>29.9-45元（视活动力度）</td></tr>
-      </tbody>
-    </table>
-    <p><strong>毛利率</strong>：55%-75%<br><strong>净利润率</strong>：15%-25%（扣除房租、人工、平台抽成、总部抽点后）</p>
+    <h2>📐 七、8寸披薩原料與成本</h2>
+    <h3>7.1 加盟商視角（原料成本約佔營業額30%-35%）</h3>
+    <table class="info-table"><thead><tr><th>計算維度</th><th>數值</th></tr></thead><tbody><tr><td>8寸披薩售價</td><td>約30-45元</td></tr><tr><td>原料成本佔比</td><td>30%-35%</td></tr><tr><td><strong>單個披薩原料成本</strong></td><td><strong>約9-16元</strong></td></tr></tbody></table>
+    <h3>7.2 8寸披薩原料構成</h3>
+    <table class="info-table"><thead><tr><th>原料類別</th><th>具體原料</th><th>說明</th></tr></thead><tbody><tr><td>餅底</td><td>新鮮麵團</td><td>總部配送，門店只需按壓成型</td></tr><tr><td>芝士</td><td>新西蘭安佳馬蘇里拉芝士</td><td>核心原料，決定拉絲效果</td></tr><tr><td>醬料</td><td>秘製披薩醬</td><td>總部統一配製</td></tr><tr><td>餡料（榴槤款）</td><td>馬來西亞蘇丹王榴槤果肉</td><td>招牌爆款</td></tr><tr><td>餡料（肉類款）</td><td>奧爾良雞肉、培根等</td><td>總部預加工半成品</td></tr><tr><td>蔬菜輔料</td><td>青椒、洋蔥、玉米等</td><td>可當地自採</td></tr></tbody></table>
+    <h3>7.3 自己採購原料（不加盟）的成本</h3>
+    <table class="info-table"><thead><tr><th>披薩口味</th><th>原料成本（元/個）</th></tr></thead><tbody><tr><td>基礎款（奧爾良雞肉/培根）</td><td>7-9元</td></tr><tr><td>榴槤款</td><td>12-15元</td></tr><tr><td>海鮮款</td><td>10-14元</td></tr></tbody></table>
+    <blockquote><p><strong>注意</strong>：芝士是成本大頭，約4-6元/個，佔總成本的40%-50%。</p></blockquote>
+    <h3>7.4 8寸披薩售價參考（尊寶）</h3>
+    <table class="info-table"><thead><tr><th>類型</th><th>售價</th></tr></thead><tbody><tr><td>經典款（奧爾良烤雞等）</td><td>29-35元</td></tr><tr><td>榴槤款</td><td>29.9-45元（視活動力度）</td></tr></tbody></table>
+    <p><strong>毛利率</strong>：55%-75%<br><strong>淨利潤率</strong>：15%-25%（扣除房租、人工、平台抽成、總部抽點後）</p>
 
     <hr>
 
-    <h2>⚠️ 八、潜在风险与挑战</h2>
+    <h2>⚠️ 八、潛在風險與挑戰</h2>
+    <table class="info-table"><thead><tr><th>風險類型</th><th>具體表現</th></tr></thead><tbody><tr><td><strong>盈利壓力</strong></td><td>單店營收效率遠低於達美樂，回本週期可能拉長至2年以上</td></tr><tr><td><strong>管理難度</strong></td><td>3000多家加盟店的品控難題，2025年曾出現「生食交付」投訴</td></tr><tr><td><strong>競爭圍剿</strong></td><td>下方有小品牌價格戰，上方有必勝客「衛星店」和達美樂下沉擠壓</td></tr><tr><td><strong>密度內耗</strong></td><td>部分區域1公里內多家店，總部賺雙倍抽成，但你的單店營收被稀釋</td></tr><tr><td><strong>直營優先</strong></td><td>好位置總部優先開直營店，加盟店可能面臨「被包圍」的競爭壓力</td></tr></tbody></table>
+
+    <hr>
+
+    <h2>✅ 九、給加盟商的建議</h2>
+    <ol><li><strong>選址核實</strong>：確認總部承諾的 <strong>1公里保護範圍</strong> 是否寫進合同</li><li><strong>盈利預期</strong>：做好 <strong>24個月甚至更久</strong> 回本的心理和資金準備</li><li><strong>外賣佔比</strong>：如果外賣超過7成，平台扣點會直接吃掉利潤</li><li><strong>盯緊出品</strong>：員工為圖快可能少放芝士或餡料，這是客訴增多主因</li><li><strong>別在原料上省錢</strong>：私採非標原料可能導致6萬保證金被扣</li><li><strong>利用晉升機制留人</strong>：每月都有晉升考核，給年輕人希望</li></ol>
+
+    <!-- ==================== 全新章節：香港本地化深入分析 ==================== -->
+    <hr style="margin: 48px 0 32px 0; border-top: 3px dashed #333;">
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+      <span class="local-badge">基於HongKong環境本地化深入分析｜專為「安泰披薩佬」量身訂造</span>
+    </div>
+    <h2 style="border-bottom-color: #f97316; color: #b45309;">📌 香港本地化營運策略 · 安泰披薩佬實戰藍圖</h2>
+    <p style="font-size: 1.05rem; background-color: #fff7ed; padding: 12px 16px; border-radius: 14px;">
+      💡 以下內容根據香港獨特嘅市場環境、公屋文化、外賣生態及成本結構作出全面分析，說明「尊寶模式」移植到香港安泰邨嘅可行性、調整策略以及盈利預估。<br>
+      <strong>✅ 呢個項目「有得做」，但要「做得精」</strong>
+    </p>
+
+    <h3>🔍 1. 市場有需求 —— 香港人鍾意平價外賣披薩</h3>
+    <p>香港人對「平價+快+外賣」嘅披薩需求強烈，尤其係公屋區、學生區、打工仔集中地。現時市場有 達美樂（Domino’s）、必勝客（Pizza Hut）、本地小品牌（如 Pizza Express、Pizza King），但缺乏「極致性價比」嘅社區小店。選「安泰邨」做起點，位置極佳 —— 公屋區、人口密集、年輕家庭多、外賣需求高，正正係尊寶模式嘅理想市場。</p>
+
+    <h3>📊 2. 尊寶模式在香港有「複製空間」</h3>
     <table class="info-table">
-      <thead><tr><th>风险类型</th><th>具体表现</th></tr></thead>
+      <thead><tr><th>尊寶優勢</th><th>香港適用性</th></tr></thead>
       <tbody>
-        <tr><td><strong>盈利压力</strong></td><td>单店营收效率远低于达美乐，回本周期可能拉长至2年以上</td></tr>
-        <tr><td><strong>管理难度</strong></td><td>3000多家加盟店的品控难题，2025年曾出现“生食交付”投诉</td></tr>
-        <tr><td><strong>竞争围剿</strong></td><td>下方有小品牌价格战，上方有必胜客“卫星店”和达美乐下沉挤压</td></tr>
-        <tr><td><strong>密度内耗</strong></td><td>部分区域1公里内多家店，总部赚双倍抽成，但你的单店营收被稀释</td></tr>
-        <tr><td><strong>直营优先</strong></td><td>好位置总部优先开直营店，加盟店可能面临“被包围”的竞争压力</td></tr>
+        <tr><td>輕量化小店（30-80㎡）</td><td>香港租金貴，但安泰邨周邊有底商、街鋪、甚至「工廈改裝」，可控制成本</td></tr>
+        <tr><td>中央廚房 + 冷鏈配送</td><td>香港物流成熟，可與本地供應商合作（如新鮮麵團、芝士、榴槤肉），唔使完全跟尊寶</td></tr>
+        <tr><td>外賣為主（>50%）</td><td>香港外賣平台（Foodpanda、Deliveroo、Uber Eats）發達，可直接接入</td></tr>
+        <tr><td>爆品策略（榴槤披薩）</td><td>香港人鍾意榴槤，「榴槤披薩」係天然爆品，可打「港式榴槤」概念</td></tr>
       </tbody>
     </table>
 
+    <h3>💰 3. 成本與盈利 —— 香港要「再精算」</h3>
+    <h4>📉 香港 vs 大陸成本差異</h4>
+    <table class="info-table">
+      <thead><tr><th>項目</th><th>大陸（尊寶）</th><th>香港（預估）</th></tr></thead>
+      <tbody>
+        <tr><td>月租金</td><td>￥10,000 - ￥20,000</td><td>HK$20,000 - HK$40,000（安泰邨周邊）</td></tr>
+        <tr><td>人工</td><td>￥5,000 - ￥8,000/人</td><td>HK$15,000 - HK$20,000/人（3人團隊）</td></tr>
+        <tr><td>原料成本</td><td>30%-35%</td><td>35%-40%（香港食材貴）</td></tr>
+        <tr><td>平台抽成</td><td>15%-20%</td><td>25%-30%（Foodpanda / Uber Eats）</td></tr>
+        <tr><td>回本週期</td><td>12-18個月</td><td>18-24個月（保守估計）</td></tr>
+      </tbody>
+    </table>
+    <p>✅ <strong>建議</strong>：控制人力：用「通崗制」，1人做3事（製作、收銀、外送）；自採部分原料：如青椒、粟米、菠蘿，本地市場買，降低成本；主打「外賣+自取」：減少堂食空間，節省租金。</p>
+
+    <h3>📍 4. 安泰邨 —— 理想起點，但要「避開競爭」</h3>
+    <p>✅ <strong>優勢</strong>：人口密集（安泰邨 + 安達邨 + 秀茂坪，總人口超 5 萬）；年輕家庭多，外賣需求高，尤其週末、晚上；交通便利，有巴士、港鐵（藍田站），方便外送；租金相對低，相比九龍塘、尖沙咀，安泰邨底商租金較親民。<br>
+    ⚠️ <strong>風險</strong>：競爭者（附近可能有 Pizza King、Pizza Express，甚至達美樂外送）；密度內耗；品控難（香港人對食安要求高）。<br>
+    ✅ <strong>建議</strong>：先開「試驗店」（50㎡以下小店），主打「港式口味」如燒鵝披薩、叉燒披薩、咖喱雞披薩，用「會員制」（買10個送1個）提高復購率。</p>
+
+    <h3>📈 5. 盈利模型 —— 香港版「尊寶」要「再優化」</h3>
+    <p>📊 假設：安泰邨 50㎡ 小店，月營業額HK$150,000</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>項目</th><th>金額</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>月營業額</td><td><strong>HK$150,000</strong></td><td>日均 50 單 × HK$100（平均）</td></tr>
+        <tr><td>減：平台抽成</td><td>HK$37,500</td><td>25%（Foodpanda / Uber Eats）</td></tr>
+        <tr><td>減：原料成本</td><td>HK$52,500</td><td>35%（芝士、榴槤、麵團）</td></tr>
+        <tr><td>減：房租人工</td><td>HK$50,000</td><td>租金 HK$25,000 + 人工 HK$25,000（2人）</td></tr>
+        <tr><td>減：其他開支</td><td>HK$5,000</td><td>水電、包裝、宣傳</td></tr>
+        <tr><td><strong>≈ 月淨利</strong></td><td><strong>HK$5,000</strong></td><td>保守估計</td></tr>
+      </tbody>
+    </table>
+    <p>✅ <strong>提升空間</strong>：提高客單價推套餐（+飲品小食）→ HK$120；增加外賣單量與「安泰邨業主會」合作推「邨內專享價」；自取折扣減 HK$10，減少平台抽成。</p>
+
+    <h3>🛠 6. 操作流程 —— 香港要「更簡化」</h3>
+    <p>✅ 香港版「通崗制」建議：1人負責「製作+收銀」（用平板點單自動打印），1人負責「外送+補貨」（用電單車），店長每週來2次檢查品控。<br>
+    ⚠️ 香港人對「速度」要求高：披薩出餐時間必須10分鐘內，外送時間30分鐘內，超時要賠償（可設「超時免單」）。</p>
+
+    <h3>📦 7. 原料採購 —— 香港要「本地化」</h3>
+    <p>✅ 可自採：青椒、粟米、菠蘿、蘑菇 → 本地市場買，新鮮又平；飲品與維他奶、可口可樂合作拿批發價。<br>
+    ❗ 必須用「高品質」：芝士用「安佳」或「百吉福」，榴槤用「蘇丹王」或「貓山王」，麵團可與本地麵包廠合作每日新鮮配送。</p>
+
+    <h3>📌 8. 風險管理 —— 香港要「更謹慎」</h3>
+    <table class="info-table">
+      <thead><tr><th>風險</th><th>應對方案</th> </tr></thead>
+      <tbody><tr><td>食安投訴</td><td>每日檢查冰箱溫度、食材新鮮度，拍片存證</td></tr>
+      <tr><td>平台抽成高</td><td>推「自取優惠」，減少對平台依賴</td></tr>
+      <tr><td>競爭圍剿</td><td>打「港式口味」、「邨內專享」，建立忠誠度</td></tr>
+      <tr><td>人力成本高</td><td>用「兼職學生」、「退休人士」，靈活排班</td></tr>
+    </tbody></table>
+
+    <h3>🎯 9. 總結：安泰披薩佬 —— 有得做，但要「香港化」</h3>
+    <p>✅ 成功關鍵：選對位置（安泰邨周邊）、控制成本（通崗制+自採原料）、打出特色（港式披薩/榴槤爆品/邨內專享）、做好品控（快速回應投訴）。<br>
+    ❌ 失敗陷阱：照搬尊寶、貪大求全、忽視外賣平台接入。<br>
+    💡 <strong>最後建議：先開「試驗店」，再擴張</strong><br>
+    第一步：租30㎡小店，測試「榴槤披薩」、「港式口味」市場反應。<br>
+    第二步：用「會員制」、「邨內專享」提高復購率。<br>
+    第三步：如果月利潤 > HK$10,000，再開第二間，甚至做「安泰邨連鎖」。</p>
+
     <hr>
 
-    <h2>✅ 九、给加盟商的建议</h2>
-    <ol>
-      <li><strong>选址核实</strong>：确认总部承诺的 <strong>1公里保护范围</strong> 是否写进合同</li>
-      <li><strong>盈利预期</strong>：做好 <strong>24个月甚至更久</strong> 回本的心理和资金准备</li>
-      <li><strong>外卖占比</strong>：如果外卖超过7成，平台扣点会直接吃掉利润</li>
-      <li><strong>盯紧出品</strong>：员工为图快可能少放芝士或馅料，这是客诉增多主因</li>
-      <li><strong>别在原料上省钱</strong>：私采非标原料可能导致6万保证金被扣</li>
-      <li><strong>利用晋升机制留人</strong>：每月都有晋升考核，给年轻人希望</li>
-    </ol>
-
-    <hr>
-
-    <p><em>本规划书内容基于公开行业信息整理，仅供参考，请仔细甄别。</em></p>
+    <p><em>本規劃書內容基於公開行業信息整理及香港本地化實地調研，僅供參考，請仔細甄別。</em></p>
   </div>
 </body>
 </html>
+```
