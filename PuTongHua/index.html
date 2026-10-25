@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#b03a2e">
+<meta name="description" content="用同音字群快速掌握普通话发音 —— 直读法">
+<title>普通话同音字 · 直读法</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="topbar">
+  <div class="topbar-row">
+    <button class="iconbtn" id="backBtn" hidden aria-label="返回">‹</button>
+    <h1 class="brand" id="brand">普通话同音字</h1>
+    <button class="iconbtn" id="favBtn" hidden aria-label="收藏">☆</button>
+    <button class="iconbtn" id="setBtn" aria-label="设置">⚙</button>
+  </div>
+  <div class="searchbar">
+    <span class="mag">🔍</span>
+    <input id="q" type="search" placeholder="输入拼音 / 汉字 / 词语，如 xiang、香、香港"
+           autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+    <button class="clearbtn" id="clearq" hidden aria-label="清空">×</button>
+  </div>
+  <div class="suggest" id="suggest" hidden></div>
+</header>
+
+<div class="settings" id="settings" hidden>
+  <div class="setrow">
+    <span class="setlabel">字形</span>
+    <div class="seg" id="segMode">
+      <button data-v="trad">繁體</button>
+      <button data-v="simp">简体</button>
+      <button data-v="both" class="on">对照</button>
+    </div>
+  </div>
+  <div class="setrow">
+    <span class="setlabel">显示生僻字</span>
+    <label class="switch"><input type="checkbox" id="chkRare"><span></span></label>
+  </div>
+  <div class="setrow">
+    <span class="setlabel">朗读语速</span>
+    <div class="seg" id="segRate">
+      <button data-v="1">常速</button>
+      <button data-v="0.85" class="on">慢速</button>
+    </div>
+  </div>
+  <p class="sethint">默认只显示《通用规范汉字表》一级 3500 常用字；打开开关可看到全部字。</p>
+  <p class="sethint warn" id="speechHint" hidden>未检测到中文语音。请在系统「语言与语音」设置里添加中文语音包，然后重新打开本页。</p>
+</div>
+
+<main id="view" class="view"></main>
+
+<div class="mask" id="mask" hidden></div>
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-head">
+    <div class="sheet-char">
+      <div class="sc-py" id="shPy"></div>
+      <div class="sc-zirow">
+        <div class="sc-zi" id="shZi"></div>
+        <button class="spk big" id="shSpeak" aria-label="朗读" title="朗读"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M11 4.5 6.2 8.6H2.6v6.8h3.6L11 19.5z"/><path class="w" d="M15.6 8.8a4.6 4.6 0 0 1 0 6.4"/><path class="w" d="M18.7 5.6a9 9 0 0 1 0 12.8"/></svg></button>
+      </div>
+      <div class="sc-alt" id="shAlt"></div>
+      <div class="sc-say" id="shSay"></div>
+    </div>
+    <button class="sheetclose" id="shClose" aria-label="关闭">×</button>
+  </div>
+  <div class="sheet-body" id="shBody"></div>
+</div>
+
+<footer class="foot">
+  <span id="footInfo"></span>
+</footer>
+
+<script src="data/dataset.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

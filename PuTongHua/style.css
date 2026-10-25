@@ -1,0 +1,255 @@
+/* ===== 普通话同音字 · 直读法 ===== */
+:root{
+  --bg:#f5f6f8;
+  --panel:#ffffff;
+  --card:#eceef2;
+  --card-hi:#e2e5eb;
+  --line:#e3e6ec;
+  --text:#1c2024;
+  --muted:#6b7280;
+  --faint:#9aa1ab;
+  --accent:#b03a2e;
+  --t1:#c0392b;   /* 一声 */
+  --t2:#c77d0a;   /* 二声 */
+  --t3:#1e8449;   /* 三声 */
+  --t4:#2471a3;   /* 四声 */
+  --radius:14px;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.06);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* 注意：.settings/.suggest/.sheet 等都设了 display:flex，会盖掉 hidden 属性，
+   所以这里必须强制隐藏，否则 hidden 失效。 */
+[hidden]{display:none !important}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",
+              "Source Han Sans SC",system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.55;
+  padding-bottom:64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;background:var(--panel);
+  border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top) + 8px) 12px 10px;
+}
+.topbar-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.brand{
+  flex:1;margin:0;font-size:17px;font-weight:700;letter-spacing:.02em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.brand small{font-weight:400;color:var(--faint);font-size:12px;margin-left:6px}
+.iconbtn{
+  border:0;background:transparent;color:var(--muted);font-size:22px;line-height:1;
+  width:34px;height:34px;border-radius:10px;cursor:pointer;flex:none;
+}
+.iconbtn:active{background:var(--card)}
+.iconbtn.on{color:#d9a406}
+
+.searchbar{display:flex;align-items:center;gap:8px;background:var(--bg);
+  border:1px solid var(--line);border-radius:11px;padding:0 10px;height:40px}
+.searchbar .mag{font-size:14px;opacity:.5;flex:none}
+.searchbar input{
+  flex:1;border:0;background:transparent;outline:none;font-size:15px;color:var(--text);
+  min-width:0;font-family:inherit;
+}
+.clearbtn{border:0;background:var(--card);color:var(--muted);width:20px;height:20px;
+  border-radius:50%;font-size:14px;line-height:1;cursor:pointer;flex:none;padding:0}
+
+.suggest{
+  position:absolute;left:12px;right:12px;top:100%;margin-top:4px;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);max-height:52vh;overflow:auto;z-index:50;
+}
+.sug{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;
+  border-bottom:1px solid var(--line)}
+.sug:last-child{border-bottom:0}
+.sug:active{background:var(--card)}
+.sug .k{font-size:19px;font-weight:600;flex:none;min-width:1.4em;text-align:center}
+.sug .k.py{font-size:14px;color:var(--accent);font-weight:500}
+.sug .d{flex:1;min-width:0;color:var(--muted);font-size:13px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sug .tag{font-size:11px;color:var(--faint);border:1px solid var(--line);
+  border-radius:6px;padding:1px 6px;flex:none}
+
+/* ---------- 设置 ---------- */
+.settings{background:var(--panel);border-bottom:1px solid var(--line);
+  padding:12px;display:flex;flex-direction:column;gap:12px}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.setlabel{font-size:14px;color:var(--muted)}
+.seg{display:flex;background:var(--bg);border:1px solid var(--line);
+  border-radius:9px;padding:2px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--muted);font-size:13px;
+  padding:6px 12px;border-radius:7px;cursor:pointer;font-family:inherit}
+.seg button.on{background:var(--panel);color:var(--text);font-weight:600;
+  box-shadow:0 1px 2px rgba(16,24,40,.1)}
+.switch{position:relative;display:inline-block;width:46px;height:27px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:#cfd4dc;border-radius:99px;
+  transition:.18s;cursor:pointer}
+.switch span:before{content:"";position:absolute;width:21px;height:21px;left:3px;top:3px;
+  background:#fff;border-radius:50%;transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked + span{background:var(--accent)}
+.switch input:checked + span:before{transform:translateX(19px)}
+.sethint{margin:0;font-size:12px;color:var(--faint);line-height:1.5}
+
+/* ---------- 通用 ---------- */
+.view{padding:14px 12px 24px;max-width:900px;margin:0 auto}
+.secttl{font-size:13px;color:var(--faint);margin:20px 2px 10px;font-weight:600;
+  letter-spacing:.06em}
+.secttl:first-child{margin-top:4px}
+
+.hero{background:linear-gradient(135deg,#fff5f3,#fff);border:1px solid #f2ddd8;
+  border-radius:var(--radius);padding:14px 16px;margin-bottom:6px}
+.hero h2{margin:0 0 6px;font-size:15px;color:var(--accent)}
+.hero p{margin:0;font-size:13px;color:#7c5b55;line-height:1.6}
+.hero b{color:var(--accent)}
+
+/* ---------- 音节表 ---------- */
+.initgroup{margin-bottom:16px}
+.inithd{display:flex;align-items:baseline;gap:8px;margin:0 2px 8px}
+.inithd .i{font-size:16px;font-weight:700;color:var(--accent)}
+.inithd .c{font-size:12px;color:var(--faint)}
+.sylgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:7px}
+.sylcell{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+  padding:8px 6px 7px;cursor:pointer;text-align:center;transition:.12s}
+.sylcell:active{transform:scale(.96)}
+.sylcell .s{font-size:15px;font-weight:600;letter-spacing:.01em}
+.sylcell .dots{display:flex;justify-content:center;gap:3px;margin-top:5px;height:6px}
+.sylcell .dots i{width:6px;height:6px;border-radius:50%;background:#dfe3e9;display:block}
+.sylcell .dots i.f1{background:var(--t1)}
+.sylcell .dots i.f2{background:var(--t2)}
+.sylcell .dots i.f3{background:var(--t3)}
+.sylcell .dots i.f4{background:var(--t4)}
+.sylcell.empty{opacity:.42;cursor:default}
+.sylcell.empty:active{transform:none}
+.sylcell .n{font-size:10px;color:var(--faint);margin-top:3px}
+
+/* ---------- 音节详情 ---------- */
+.sylhead{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;box-shadow:var(--shadow)}
+.sylhead .big{font-size:30px;font-weight:700;letter-spacing:.02em;line-height:1.15}
+.sylhead .meta{font-size:12px;color:var(--faint);margin-top:4px}
+.sylhead .meta b{color:var(--muted);font-weight:600}
+/* 声调分组：一次列出全部声调，每段一个标题 + 一组卡片 */
+.tonesec{scroll-margin-top:92px}
+.tonesec .secttl{margin-top:22px;margin-bottom:10px}
+.tonesec .secttl.toneless{margin-top:10px;margin-bottom:0;color:var(--faint);opacity:.75;font-weight:400}
+.tonesec[data-t="1"] .secttl:not(.toneless){color:var(--t1)}
+.tonesec[data-t="2"] .secttl:not(.toneless){color:var(--t2)}
+.tonesec[data-t="3"] .secttl:not(.toneless){color:var(--t3)}
+.tonesec[data-t="4"] .secttl:not(.toneless){color:var(--t4)}
+
+.chgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));
+  gap:8px;margin-top:14px}
+.chcard{position:relative;background:var(--card);border-radius:12px;padding:8px 4px 9px;
+  text-align:center;cursor:pointer;transition:.12s;border:1px solid transparent}
+.chcard:active{transform:scale(.95);background:var(--card-hi)}
+.chcard .py{font-size:11px;color:var(--muted);line-height:1.2;letter-spacing:.01em;
+  white-space:nowrap;overflow:hidden}
+.chcard .zi{font-size:30px;line-height:1.25;margin-top:1px;font-weight:500}
+.chcard .alt{font-size:11px;color:var(--faint);line-height:1.2;height:14px}
+.chcard.rare{opacity:.5}
+.chcard.fav:after{content:"★";position:absolute;top:3px;right:5px;font-size:10px;
+  color:#d9a406}
+.chcard .wn{font-size:10px;color:var(--faint);margin-top:2px}
+
+.rarewrap{margin-top:16px;text-align:center}
+.raretoggle{border:1px dashed var(--line);background:transparent;color:var(--muted);
+  font-size:13px;padding:9px 16px;border-radius:10px;cursor:pointer;font-family:inherit}
+.raretoggle:active{background:var(--card)}
+
+/* ---------- 词语表 ---------- */
+.wordlist{display:flex;flex-direction:column;gap:0}
+.worditem{display:flex;align-items:baseline;gap:10px;padding:9px 2px;
+  border-bottom:1px solid var(--line)}
+.worditem:last-child{border-bottom:0}
+.worditem .w{font-size:17px;font-weight:500;flex:none}
+.worditem .wp{font-size:13px;color:var(--accent);letter-spacing:.02em;flex:none}
+.worditem .ws{font-size:12px;color:var(--faint);margin-left:auto;flex:none}
+.emptyhint{color:var(--faint);font-size:13px;padding:10px 2px}
+
+/* ---------- 汉字详情 ---------- */
+.chhero{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;display:flex;gap:16px;align-items:center;box-shadow:var(--shadow)}
+.chhero .bigzi{font-size:56px;line-height:1;font-weight:500}
+.chhero .info{flex:1;min-width:0}
+.chhero .rd{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.rdpill{border-radius:8px;padding:3px 9px;font-size:14px;color:#fff;cursor:pointer;
+  border:0;font-family:inherit}
+.rdpill[data-t="1"]{background:var(--t1)}
+.rdpill[data-t="2"]{background:var(--t2)}
+.rdpill[data-t="3"]{background:var(--t3)}
+.rdpill[data-t="4"]{background:var(--t4)}
+.chhero .lv{font-size:12px;color:var(--faint);margin-top:8px}
+
+/* ---------- 底部弹层 ---------- */
+.mask{position:fixed;inset:0;background:rgba(20,24,30,.34);z-index:60;
+  animation:fade .16s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;background:var(--panel);
+  border-radius:20px 20px 0 0;max-height:78vh;display:flex;flex-direction:column;
+  box-shadow:0 -8px 30px rgba(16,24,40,.18);animation:up .2s cubic-bezier(.2,.8,.3,1);
+  padding-bottom:env(safe-area-inset-bottom)}
+@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-head{display:flex;align-items:flex-start;padding:18px 18px 12px;gap:12px;
+  border-bottom:1px solid var(--line)}
+.sheet-char{flex:1;min-width:0}
+.sc-py{font-size:15px;color:var(--accent);letter-spacing:.03em}
+.sc-zi{font-size:44px;line-height:1.15;font-weight:500}
+.sc-alt{font-size:13px;color:var(--faint);min-height:18px}
+.sheetclose{border:0;background:var(--card);color:var(--muted);width:30px;height:30px;
+  border-radius:50%;font-size:18px;line-height:1;cursor:pointer;flex:none;padding:0}
+.sheet-body{padding:6px 18px 18px;overflow:auto;-webkit-overflow-scrolling:touch}
+.sheet-body .secttl{margin-top:14px}
+.acts{display:flex;gap:8px;margin-top:14px}
+.actbtn{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:11px;
+  padding:10px;font-size:14px;color:var(--muted);cursor:pointer;font-family:inherit}
+.actbtn:active{background:var(--card)}
+.actbtn.on{color:#d9a406;border-color:#f0dca0;background:#fffaeb}
+
+/* ---------- 页脚 ---------- */
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(245,246,248,.94);
+  backdrop-filter:blur(8px);border-top:1px solid var(--line);text-align:center;
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom));font-size:11px;color:var(--faint)}
+
+@media (min-width:560px){
+  .chgrid{grid-template-columns:repeat(auto-fill,minmax(82px,1fr))}
+  .sylgrid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr))}
+}
+
+/* ---------- 发音朗读 ---------- */
+/* 卡片右上角的小喇叭（.spk 默认绝对定位）；弹层和词条里用 .big / 覆盖成静态 */
+.spk{position:absolute;top:1px;right:1px;width:20px;height:20px;border:0;background:transparent;
+  color:var(--muted);padding:0;border-radius:50%;cursor:pointer;z-index:2;opacity:.9;
+  display:flex;align-items:center;justify-content:center}
+.spk svg{width:13px;height:13px;display:block}
+.spk svg .b{fill:currentColor}
+.spk svg .w{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+.spk:active{background:var(--card-hi);opacity:1}
+.spk.speaking{color:var(--accent);opacity:1}
+.spk.big{position:static;width:32px;height:32px;flex:none;margin-top:4px;opacity:1;
+  background:var(--card)}
+.spk.big svg{width:17px;height:17px}
+/* 词条右侧：繁体角标 + 喇叭 一起靠右对齐 */
+.worditem .wend{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
+.worditem .ws{margin-left:0}
+.worditem .spk{position:static;width:20px;height:20px;flex:none;opacity:.85}
+.worditem .spk svg{width:12px;height:12px}
+/* 没有可用中文语音时，把所有喇叭藏掉，界面不留残骸 */
+body.no-speech .spk{display:none !important}
+.sethint.warn{color:var(--accent)}
+/* ★ 收藏角标让位给右上角喇叭，挪到左上角 */
+.chcard.fav:after{left:5px;right:auto}
+/* 极窄屏才给拼音让位，正常手机上拼音保持居中 */
+@media (max-width:359px){ .chcard .py{padding-right:13px} }
+
+/* 汉字详情：大字 + 喇叭竖排 */
+.bigzi-wrap{display:flex;flex-direction:column;align-items:center;flex:none}
+
+/* 弹层头部：大字与喇叭同一行 */
+.sc-zirow{display:flex;align-items:center;gap:10px}
+.sc-say{font-size:12px;color:var(--muted);min-height:16px;margin-top:2px}
